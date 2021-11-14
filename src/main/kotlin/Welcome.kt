@@ -1,11 +1,15 @@
 import kotlinx.html.InputType
 import kotlinx.html.js.onChangeFunction
+import kotlinx.html.js.onClickFunction
 import org.w3c.dom.HTMLInputElement
 import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.RState
 import react.dom.attrs
+import react.dom.button
+import react.dom.div
+import react.dom.img
 import styled.css
 import styled.styledDiv
 import styled.styledInput
@@ -28,7 +32,7 @@ class Welcome(props: WelcomeProps) : RComponent<WelcomeProps, WelcomeState>(prop
             css {
                 +WelcomeStyles.textContainer
             }
-            +"Hello, ${state.name}"
+            +"Hello, ${state.name}, your name reversed ${state.name.reversed()}"
         }
         styledInput {
             css {
@@ -43,6 +47,19 @@ class Welcome(props: WelcomeProps) : RComponent<WelcomeProps, WelcomeState>(prop
                     )
                 }
             }
+        }
+        div{
+            button{
+                attrs.onClickFunction = {
+                    setState(
+                        WelcomeState(name = "changed name")
+                    )
+                }
+                +"Change name"
+            }
+        }
+        div {
+            img(src = "https://placekitten.com/408/287"){}
         }
     }
 }
